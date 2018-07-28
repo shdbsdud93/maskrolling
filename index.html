@@ -1,0 +1,24 @@
+<html>
+<head>
+
+  <meta charset="utf-8"/>
+  <script src="./min.js"></script>
+
+</head>
+<body>
+
+  <div id="item-list-container" style="width: 250px; height: 450px;">
+  </div>
+
+  <script>
+
+    var itemList = [];
+    for (var i = 0; i < 100000; i++)
+      itemList.push({name: 'item ' + i, bgColor: i % 2 == 0 ? 'LightStateGray': 'LightSteelBlue'});
+
+    makeMaskrollable('item-list-container', itemList, 65);
+
+  </script>
+
+</body>
+</html>
