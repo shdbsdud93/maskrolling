@@ -3,7 +3,6 @@ function maskroll(itemList, itemHeight, mask, maskHeight, maskScrollTop) {
   var container = mask.appendChild(document.createElement('div'));
 
   var topHeight = maskScrollTop - (maskScrollTop % itemHeight);
-  console.log('top', topHeight);
   container.appendChild(document.createElement('div')).style.height = topHeight;
 
   var f = topHeight / itemHeight;
@@ -26,8 +25,6 @@ function maskroll(itemList, itemHeight, mask, maskHeight, maskScrollTop) {
   }
 
   var bottomHeight = itemList.length * itemHeight - topHeight - listHeight;
-  console.log('virtual', itemList.length * itemHeight);
-  console.log('bottom', bottomHeight);
   container.appendChild(document.createElement('div')).style.height = bottomHeight;
 }
 
@@ -41,4 +38,19 @@ function makeMaskrollable(containerId, itemList, itemHeight) {
     maskroll(itemList, itemHeight, mask, maskHeight, mask.scrollTop);
   }
   maskroll(itemList, itemHeight, mask, maskHeight, 0);
+
+  var controller = {
+    addTo: function(i, newItemList) {
+      for (var j = newItemList.length - 1; j > -1; j--) {
+        itemList.splice(i, 0, newItemList[j]);
+      }
+      maskroll(itemList, itemHeight, mask, maskHeight, mask.scrollTop);
+    },
+    removeFrom: function(i, n) {
+      itemList.splice(i, n);
+      maskroll(itemList, itemHeight, mask, maskHeight, mask.scrollTop);
+    }
+  }
+
+  return controller;
 }
