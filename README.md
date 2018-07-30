@@ -1,2 +1,2 @@
 # maskrolling
-Masking + Scrolling
+Virtual Scrolling is like masking while scrolling.
